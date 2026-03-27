@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   disorder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/27 14:58:09 by adarmoya          #+#    #+#             */
+/*   Updated: 2026/03/27 15:35:26 by adarmoya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+float	disorder(t_stack *st)
+{
+	int		total_pairs;
+	float	mistakes;
+	t_stack	*cur1;
+	t_stack	*cur2;
+
+	mistakes = 0;
+	total_pairs = 0;
+	cur1 = st;
+	cur2 = cur1->next;
+	while (cur1->next)
+	{
+		cur2 = cur1->next;
+		while (cur2)
+		{
+			total_pairs++;
+			if (cur1->content > cur2->content)
+				mistakes++;
+			cur2 = cur2->next;
+		}
+		cur1 = cur1->next;
+	}
+	return (mistakes / total_pairs);
+}
+
+// int	main(void)
+// {
+// 	char *str = "-5 2    -300000000";
+// 	t_stack	*st = parse(&str);
+// 	printf("%f\n", compute_disorder(st));
+// 	return (0);
+// }

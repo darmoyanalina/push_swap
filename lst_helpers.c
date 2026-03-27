@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:34:40 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/25 16:02:35 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:08:26 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,19 @@ void	ft_lstadd_back(t_stack **lst, t_stack *new)
 	new->prev = last;
 }
 
-void	ft_lstadd_front(t_stack **lst, t_stack *new)
+int	ft_lstsize(t_stack *lst)
 {
-	if (!lst || !new)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	int	i;
+
+	i = 1;
+	if (!lst)
+		return (0);
+	while (lst->next)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
 
 t_stack	*ft_lstlast(t_stack *lst)

@@ -6,11 +6,17 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:18:07 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/25 20:56:30 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:37:45 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	err(void)
+{
+	write (2, "Error\n", 6);
+	exit(1);
+}
 
 int	ft_isval(int c)
 {
@@ -30,7 +36,7 @@ int	validation(const char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (i > 0 && arg[i - 1] != ' ' &&
+		if (i > 0 && (arg[i - 1] != ' ' || arg[i + 1] == ' ') &&
 			(arg[i] == '+' || arg[i] == '-'))
 			return (result);
 		if (arg[i] != '-' && arg[i] != '+' &&
@@ -43,7 +49,7 @@ int	validation(const char *arg)
 
 int	ft_atoi(const char *nptr)
 {
-	int	number;
+	long	number;
 	int	i;
 	int	sign;
 
@@ -64,7 +70,9 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	number *= sign;
-	return (number);
+	if (number > INT_MAX || number < INT_MIN )
+		err();
+	return ((int)number);
 }
 
 t_stack	*parse(char **arg)
@@ -75,10 +83,7 @@ t_stack	*parse(char **arg)
 	int		n;
 
 	if (!validation(*arg))
-	{
-		write (2, "Error\n", 6);
-		exit(1);
-	}
+		err();
 	str = ft_split(*arg, ' ');
 	i = 0;
 	st = NULL;
@@ -86,7 +91,6 @@ t_stack	*parse(char **arg)
 	while (str[i])
 	{
 		n = ft_atoi(str[i]);
-		// n-i validation
 		ft_lstadd_back(&st, ft_lstnew(n));
 		i++;
 	}
@@ -95,7 +99,7 @@ t_stack	*parse(char **arg)
 
 // int	main(void)
 // {
-// 	char *str = "-5 2   	";
+// 	char *str = "5530000000000000000";
 // 	t_stack	*st = parse(&str);
 // 	t_stack	*tmp = st;
 // 	while (tmp)

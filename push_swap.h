@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/25 20:58:55 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:29:55 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 # include <stdio.h>
 
 typedef struct d_list
@@ -24,8 +25,7 @@ typedef struct d_list
 	struct d_list	*prev;
 }	t_stack;
 
-void	ft_lstadd_back(t_stack **lst, t_stack *n);
-void	ft_lstadd_front(t_stack **lst, t_stack *n);
+void	ft_lstadd_back(t_stack **lst, t_stack *new);
 void	push(t_stack **st1, t_stack **st2);
 void	pa(t_stack	**a, t_stack **b);
 void	pb(t_stack	**a, t_stack **b);
@@ -41,9 +41,12 @@ void	r_rotate(t_stack **st);
 void	rra(t_stack **a);
 void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
+void	err(void);
+int		ft_lstsize(t_stack *lst);
 int		ft_atoi(const char *nptr);
 int		validation(const char *arg);
 int		ft_isval(int c);
+float	disorder(t_stack *st);
 char	**ft_split(char const *s, char c);
 t_stack	*parse(char **arg);
 t_stack	*ft_lstnew(int content);
