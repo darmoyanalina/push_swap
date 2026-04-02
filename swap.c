@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 21:23:15 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/25 15:39:40 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/02 14:59:45 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,20 @@ void	swap(t_stack **st)
 void	sa(t_stack	**a)
 {
 	swap(a);
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_stack **b)
 {
 	swap(b);
+	write(1, "sb\n", 3);
 }
 
 void	ss(t_stack	**a, t_stack	**b)
 {
 	sa(a);
 	sb(b);
+	write(1, "ss\n", 3);
 }
 
 // int	main(void)

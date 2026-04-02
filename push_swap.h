@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/27 15:29:55 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/02 20:21:52 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ char	**ft_split(char const *s, char c);
 t_stack	*parse(char **arg);
 t_stack	*ft_lstnew(int content);
 t_stack	*ft_lstlast(t_stack *lst);
+void	check_duplicates(t_stack *st);
+void	sort_tiny(t_stack **st);
+int		find_target(t_stack **st, int n);
+void	insertion_sort(t_stack **st1, t_stack **st2);
 
 #endif

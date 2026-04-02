@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_rotate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 15:48:43 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/25 16:04:23 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/02 14:59:26 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,20 @@ void	r_rotate(t_stack **st)
 void	rra(t_stack **a)
 {
 	r_rotate(a);
+	write(1, "rra\n", 4);
 }
 
 void	rrb(t_stack **b)
 {
 	r_rotate(b);
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_stack **a, t_stack **b)
 {
 	rra(a);
 	rrb(b);
+	write(1, "rrr\n", 4);
 }
 
 // int	main(void)

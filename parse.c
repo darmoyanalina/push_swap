@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:18:07 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/27 15:37:45 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/03/31 13:54:55 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	err(void)
 
 int	ft_isval(int c)
 {
-	if ((c >= '0' && c <= '9') ||
-		(c >= 9 && c <= 13) || c == ' ')
+	if ((c >= '0' && c <= '9') || (c >= 9 && c <= 13) || c == ' ')
 		return (1);
 	else
 		return (0);
@@ -36,11 +35,10 @@ int	validation(const char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (i > 0 && (arg[i - 1] != ' ' || arg[i + 1] == ' ') &&
-			(arg[i] == '+' || arg[i] == '-'))
+		if (i > 0 && (arg[i - 1] != ' ' || arg[i + 1] == ' ')
+			&& (arg[i] == '+' || arg[i] == '-'))
 			return (result);
-		if (arg[i] != '-' && arg[i] != '+' &&
-			!ft_isval(arg[i]))
+		if (arg[i] != '-' && arg[i] != '+' && !ft_isval(arg[i]))
 			return (result);
 		i++;
 	}
@@ -50,8 +48,8 @@ int	validation(const char *arg)
 int	ft_atoi(const char *nptr)
 {
 	long	number;
-	int	i;
-	int	sign;
+	int		i;
+	int		sign;
 
 	i = 0;
 	number = 0;
@@ -70,7 +68,7 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	number *= sign;
-	if (number > INT_MAX || number < INT_MIN )
+	if (number > INT_MAX || number < INT_MIN)
 		err();
 	return ((int)number);
 }
@@ -94,12 +92,17 @@ t_stack	*parse(char **arg)
 		ft_lstadd_back(&st, ft_lstnew(n));
 		i++;
 	}
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+	check_duplicates(st);
 	return (st);
 }
 
 // int	main(void)
 // {
-// 	char *str = "5530000000000000000";
+// 	char *str = "553000";
 // 	t_stack	*st = parse(&str);
 // 	t_stack	*tmp = st;
 // 	while (tmp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:34:40 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/27 15:08:26 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/03/31 13:54:19 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,3 @@ t_stack	*ft_lstnew(int content)
 	node->prev = NULL;
 	return (node);
 }
-
-

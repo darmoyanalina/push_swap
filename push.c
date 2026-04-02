@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 20:12:29 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/23 21:21:10 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/02 20:27:52 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,22 @@ void	push(t_stack **st1, t_stack **st2)
 		*st2 = tmp2;
 	}
 	else
+	{
 		(*st2)->next = tmp1;
-	if (tmp1 == *st2)
 		*st2 = NULL;
+	}
 }
 
 void	pa(t_stack	**a, t_stack **b)
 {
 	push(a, b);
+	write(1, "pa\n", 3);
 }
 
 void	pb(t_stack	**a, t_stack **b)
 {
 	push(b, a);
+	write(1, "pb\n", 3);
 }
 
 // int	main(void)
