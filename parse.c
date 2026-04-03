@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
+/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:18:07 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/03/31 13:54:55 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:17:29 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ int	validation(const char *arg)
 {
 	int	result;
 	int	i;
+	int	empty;
 
 	result = 0;
 	i = 0;
+	empty = 0;
 	while (arg[i])
 	{
 		if (i > 0 && (arg[i - 1] != ' ' || arg[i + 1] == ' ')
@@ -40,8 +42,12 @@ int	validation(const char *arg)
 			return (result);
 		if (arg[i] != '-' && arg[i] != '+' && !ft_isval(arg[i]))
 			return (result);
+		if ((arg[i] >= 9 && arg[i] <= 13) || arg[i] == ' ')
+			empty++;
 		i++;
 	}
+	if (empty == i)
+		return (result);
 	return (1);
 }
 
@@ -76,27 +82,40 @@ int	ft_atoi(const char *nptr)
 t_stack	*parse(char **arg)
 {
 	char	**str;
+	char	**argv;
 	t_stack	*st;
 	int		i;
 	int		n;
 
-	if (!validation(*arg))
-		err();
-	str = ft_split(*arg, ' ');
-	i = 0;
+	argv = arg;
 	st = NULL;
-	n = 0;
-	while (str[i])
+	while (*argv)
 	{
-		n = ft_atoi(str[i]);
-		ft_lstadd_back(&st, ft_lstnew(n));
-		i++;
+		if (!check_flags(*argv))
+		{
+			if (!validation(*argv))
+				err();
+			str = ft_split(*argv, ' ');
+			i = 0;
+			n = 0;
+			while (str[i])
+			{
+				n = ft_atoi(str[i]);
+				ft_lstadd_back(&st, ft_lstnew(n));
+				i++;
+			}
+			i = 0;
+			while (str[i])
+				free(str[i++]);
+			free(str);
+			check_duplicates(st);
+			argv++;
+		}
+		else
+		{
+			argv++;
+		}
 	}
-	i = 0;
-	while (str[i])
-		free(str[i++]);
-	free(str);
-	check_duplicates(st);
 	return (st);
 }
 
