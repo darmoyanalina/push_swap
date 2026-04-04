@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:58 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/03 19:00:10 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/04 14:24:51 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ void	print_stack(t_stack *st)
 	}
 }
 
+void	free_stack(t_stack *st)
+{
+	t_stack	*tmp;
+
+	tmp = st;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		free(st);
+		st = tmp;
+	}
+	st = NULL;
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -33,7 +47,12 @@ int	main(int argc, char **argv)
 		return (0);
 	a = parse(&argv[1]);
 	b = NULL;
-	insertion_sort(&a, &b);
+	// insertion_sort(&a, &b);
+	quick_sort(&a, &b);
+	write (1, "a\n", 2);
 	print_stack(a);
+	write (1, "b\n", 2);
+	print_stack(b);
+	free_stack(a);
 	return (0);
 }
