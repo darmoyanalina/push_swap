@@ -50,6 +50,7 @@ int	main(int argc, char **argv)
 	// insertion_sort(&a, &b);
 	quick_sort(&a, &b);
 	write (1, "a\n", 2);
+	// sort_tiny_rev(&a);
 	print_stack(a);
 	write (1, "b\n", 2);
 	print_stack(b);

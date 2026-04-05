@@ -12,86 +12,112 @@
 
 #include "push_swap.h"
 
-int	pivot_val(t_stack *st)
+int	pivot_val(t_stack *st, int size)
 {
-	int		middle;
+	int		sum;
 	int		i;
 	t_stack	*piv;
 
-	middle = ft_lstsize(st)/2;
 	piv = st;
+	sum = 0;
 	i = 0;
-	while (i < middle)
+	while (i < size)
 	{
+		sum += piv->rank;
 		piv = piv->next;
 		i++;
 	}
-	return (piv->rank);
+	return (sum / i);
 }
 
-void	q_sort_helper_b(t_stack **a, t_stack **b, int pivot)
+void	sort_b(t_stack **a, t_stack **b, int size)
 {
-	int	b_top;
+	int	i;
+	int	pivot;
+	int	rotate_count;
+	int	push_count;
 
-	if (!(*b))
-		return ;
-	b_top = (*b)->content;
-	if (b_top <= pivot)
-		pa(a, b);
-	else
-		rb(b);
-	while (*b && b_top != (*b)->content)
+	i = 0;
+	pivot = pivot_val(*b, size);
+	rotate_count = 0;
+	push_count = 0;
+	if (size <= 3)
 	{
-		if (*a && b_top == (*a)->content)
-			b_top = ((*b)->content);
-		if ((*b)->content <= pivot)
+		sort_tiny_quick_rev(a, b, size);
+		while (size--)
 			pa(a, b);
-		else
-			rb(b);
+		return ;
 	}
+	while (i < size)
+	{
+		if ((*b)->rank > pivot)
+		{
+			pa(a, b);
+			push_count++;
+		}
+		else
+		{
+			rb(b);
+			rotate_count++;
+		}
+		i++;
+	}
+	write(1, "bbbb\n", 5);
+	printf("%d %d\n", push_count, size);
+	while (rotate_count--)
+		rrb(b);
+	sort_b(a, b, size - push_count);
+	sort_a(a, b, push_count);
 }
 
-void	q_sort_helper_a(t_stack **a, t_stack **b, int pivot)
+void	sort_a(t_stack **a, t_stack **b, int size)
 {
-	int	a_top;
+	int	i;
+	int	pivot;
+	int	rotate_count;
+	int	push_count;
 
-	if (!(*a) || !disorder(*a))
-		return ;
-	a_top = (*a)->rank;
-	if (a_top < pivot)
-		pb(a, b);
-	else
-		ra(a);
-	while (*a && a_top != (*a)->rank)
+	i = 0;
+	printf("size = %d\n", size);
+	pivot = pivot_val(*a, size);
+	rotate_count = 0;
+	push_count = 0;
+	if (size <= 3)
 	{
-		if (*b && a_top == (*b)->rank)
-			a_top = ((*a)->rank);
-		if ((*a)->rank < pivot)
-			pb(a, b);
-		else
-			ra(a);
+		sort_tiny_quick(a, b, size);
+		return ;
 	}
-	while (pivot != (*a)->rank)
-		ra(a);
+	while (i < size)
+	{
+		if ((*a)->rank <= pivot)
+		{
+			pb(a, b);
+			push_count++;
+		}
+		else
+		{
+			ra(a);
+			rotate_count++;
+		}
+		i++;
+	}
+	write(1, "aaaa\n", 5);
+	printf("i = %d  %d %d %d\n", i, rotate_count, push_count, size);
+	while (rotate_count--)
+	{
+		write (1, "loop\n", 5);
+		rra(a);
+	}
+	sort_a(a, b, size - push_count);
+	sort_b(a, b, push_count);
 }
 
 void	quick_sort(t_stack **a, t_stack **b)
 {
-	int		pivot;
+	int	size;
 
+	size = ft_lstsize(*a);
 	if (!disorder(*a) || !(*a)->next)
 		return ;
-	pivot = pivot_val(*a);
-	q_sort_helper_a(a, b, pivot);
-	quick_sort(a, b);
-	while (*b)
-	{
-		if ((*a)->rank > (*b)->rank)
-			pa(a, b);
-		else
-		{
-			pa(a, b);
-			sa(a);
-		}
-	}
+	sort_a(a, b, size);
 }

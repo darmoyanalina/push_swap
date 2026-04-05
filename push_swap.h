@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <unistd.h>
+// # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <stdio.h>
@@ -53,6 +53,8 @@ void	check_dup_f(void);
 void	free_stack(t_stack *st);
 void	ranking(t_stack *st);
 void	sort_array(int *contents, int size);
+void	sort_tiny_quick(t_stack **st, t_stack **st1, int size);
+void	sort_tiny_quick_rev(t_stack **st, t_stack **st1, int size);
 int		*get_array(t_stack *st);
 int		ft_lstsize(t_stack *lst);
 int		ft_atoi(const char *nptr);
@@ -61,7 +63,7 @@ int		ft_isval(int c);
 int		ft_strcmp(const char *s1, const char *s2);
 int		find_target(t_stack **st, int n);
 int		check_flags(char *str);
-int		pivot_val(t_stack *st);
+int		pivot_val(t_stack *st, int size);
 float	disorder(t_stack *st);
 char	**ft_split(char const *s, char c);
 t_stack	*parse(char **arg);
