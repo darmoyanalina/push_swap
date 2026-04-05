@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 13:37:39 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/04 16:10:19 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:51:11 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,13 @@ int	pivot_val(t_stack *st)
 
 	middle = ft_lstsize(st)/2;
 	piv = st;
-	// if ((middle > st->content && middle < ft_lstlast(st)->content) ||
-	// 	(middle < st->content && middle > ft_lstlast(st)->content))
-	// {
-		i = 0;
-		while (i < middle)
-		{
-			piv = piv->next;
-			i++;
-		}
-	// }
-	// else if ((middle > st->content && st->content < ft_lstlast(st)->content) ||
-	// 	(middle < st->content && st->content > ft_lstlast(st)->content))
-	// 	piv = ft_lstlast(st);
-	return (piv->content);
+	i = 0;
+	while (i < middle)
+	{
+		piv = piv->next;
+		i++;
+	}
+	return (piv->rank);
 }
 
 void	q_sort_helper_b(t_stack **a, t_stack **b, int pivot)
@@ -64,45 +57,41 @@ void	q_sort_helper_a(t_stack **a, t_stack **b, int pivot)
 
 	if (!(*a) || !disorder(*a))
 		return ;
-	a_top = (*a)->content;
-	if (a_top <= pivot)
+	a_top = (*a)->rank;
+	if (a_top < pivot)
 		pb(a, b);
 	else
 		ra(a);
-	while (*a && a_top != (*a)->content)
+	while (*a && a_top != (*a)->rank)
 	{
-		if (*b && a_top == (*b)->content)
-			a_top = ((*a)->content);
-		if ((*a)->content <= pivot)
+		if (*b && a_top == (*b)->rank)
+			a_top = ((*a)->rank);
+		if ((*a)->rank < pivot)
 			pb(a, b);
 		else
 			ra(a);
 	}
-	if (*a)
-		printf("a%d\n", (*a)->content);
+	while (pivot != (*a)->rank)
+		ra(a);
 }
 
 void	quick_sort(t_stack **a, t_stack **b)
 {
-	int	pivot;
+	int		pivot;
 
-	if (!disorder(*a))
+	if (!disorder(*a) || !(*a)->next)
 		return ;
-	while (*a)
-	{
-		pivot = pivot_val(*a);
-		// if (*a && !(*a)->next)
-		// 	pivot = (*a)->content;
-		q_sort_helper_a(a, b, pivot);
-		printf ("pivot = %d\n", pivot);
-	}
+	pivot = pivot_val(*a);
+	q_sort_helper_a(a, b, pivot);
+	quick_sort(a, b);
 	while (*b)
 	{
-		pivot = pivot_val(*b);
-		// if (*b && !(*b)->next)
-		// 	pivot = (*b)->content;
-		q_sort_helper_b(a, b, pivot);
-		printf ("bpivot = %d\n", pivot);
+		if ((*a)->rank > (*b)->rank)
+			pa(a, b);
+		else
+		{
+			pa(a, b);
+			sa(a);
+		}
 	}
-	// quick_sort(a, b);
 }

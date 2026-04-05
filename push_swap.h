@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/04 13:47:41 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/05 19:36:37 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@
 typedef struct d_list
 {
 	int				content;
+	int				rank;
 	struct d_list	*next;
 	struct d_list	*prev;
 }	t_stack;
+
+void	print_stack(t_stack *st);
 
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
 void	push(t_stack **st1, t_stack **st2);
@@ -47,6 +50,10 @@ void	sort_tiny(t_stack **st);
 void	insertion_sort(t_stack **st1, t_stack **st2);
 void	quick_sort(t_stack **a, t_stack **b);
 void	check_dup_f(void);
+void	free_stack(t_stack *st);
+void	ranking(t_stack *st);
+void	sort_array(int *contents, int size);
+int		*get_array(t_stack *st);
 int		ft_lstsize(t_stack *lst);
 int		ft_atoi(const char *nptr);
 int		validation(const char *arg);
