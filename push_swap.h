@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-// # include <unistd.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <stdio.h>
@@ -55,6 +55,8 @@ void	ranking(t_stack *st);
 void	sort_array(int *contents, int size);
 void	sort_tiny_quick(t_stack **st, t_stack **st1, int size);
 void	sort_tiny_quick_rev(t_stack **st, t_stack **st1, int size);
+void	sort_a(t_stack **a, t_stack **b, int size);
+void	sort_b(t_stack **a, t_stack **b, int size);
 int		*get_array(t_stack *st);
 int		ft_lstsize(t_stack *lst);
 int		ft_atoi(const char *nptr);

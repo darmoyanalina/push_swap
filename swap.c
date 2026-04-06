@@ -15,19 +15,20 @@
 
 void	swap(t_stack **st)
 {
-	t_stack	*tmp1;
-	t_stack	*tmp2;
+	t_stack *first;
+	t_stack *second;
 
 	if (!st || !*st || !(*st)->next)
-		return ;
-	tmp1 = *st;
-	tmp2 = (*st)->next;
-	*st = tmp2;
-	(*st)->prev = NULL;
-	tmp1->next = (*st)->next;
-	(*st)->next = tmp1;
-	if (tmp1->next)
-		tmp1->next->prev = tmp1;
+		return;
+	first = *st;
+	second = first->next;
+	*st = second;
+	second->prev = NULL;
+	first->next = second->next;
+	if (second->next)
+		second->next->prev = first;
+	second->next = first;
+	first->prev = second;
 }
 
 void	sa(t_stack	**a)

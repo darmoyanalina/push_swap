@@ -22,22 +22,18 @@ void	push(t_stack **st1, t_stack **st2)
 		return ;
 	tmp1 = *st1;
 	tmp2 = *st2;
-	if (st1)
-	{
-		if (*st1)
-			(*st1)->prev = *st2;
-		*st1 = *st2;
-	}
+	if (*st1)
+		tmp1->prev = *st2;
+	*st1 = tmp2;
 	if ((*st2)->next)
 	{
-		tmp2 = (*st2)->next;
-		(*st2)->next->prev = NULL;
-		(*st2)->next = tmp1;
-		*st2 = tmp2;
+		*st2 = (*st2)->next;
+		(*st2)->prev = NULL;
+		tmp2->next = tmp1;
 	}
 	else
 	{
-		(*st2)->next = tmp1;
+		tmp2->next = tmp1;
 		*st2 = NULL;
 	}
 }

@@ -58,4 +58,5 @@ void	sort_tiny_quick_rev(t_stack **st, t_stack **st1, int size)
 		if ((*st1)->content < (*st1)->next->content)
 			sb(st1);
 	}
+	
 }

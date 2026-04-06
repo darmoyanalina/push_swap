@@ -29,6 +29,18 @@ int	pivot_val(t_stack *st, int size)
 	}
 	return (sum / i);
 }
+void	call_ops(t_stack **a, t_stack **b, const char *op, int *count)
+{
+	if (!ft_strcmp(op, "ra"))
+		ra(a);
+	else if (!ft_strcmp(op, "rb"))
+		rb(b);
+	else if (!ft_strcmp(op, "pa"))
+		pa(a, b);
+	else if (!ft_strcmp(op, "pb"))
+		pb(a,b);
+	(*count)++;
+}
 
 void	sort_b(t_stack **a, t_stack **b, int size)
 {
@@ -48,22 +60,13 @@ void	sort_b(t_stack **a, t_stack **b, int size)
 			pa(a, b);
 		return ;
 	}
-	while (i < size)
+	while (i++ < size)
 	{
 		if ((*b)->rank > pivot)
-		{
-			pa(a, b);
-			push_count++;
-		}
+			call_ops(a, b, "pa", &push_count);
 		else
-		{
-			rb(b);
-			rotate_count++;
-		}
-		i++;
+			call_ops(a, b, "rb", &rotate_count);
 	}
-	write(1, "bbbb\n", 5);
-	printf("%d %d\n", push_count, size);
 	while (rotate_count--)
 		rrb(b);
 	sort_b(a, b, size - push_count);
@@ -78,7 +81,6 @@ void	sort_a(t_stack **a, t_stack **b, int size)
 	int	push_count;
 
 	i = 0;
-	printf("size = %d\n", size);
 	pivot = pivot_val(*a, size);
 	rotate_count = 0;
 	push_count = 0;
@@ -87,27 +89,15 @@ void	sort_a(t_stack **a, t_stack **b, int size)
 		sort_tiny_quick(a, b, size);
 		return ;
 	}
-	while (i < size)
+	while (i++ < size)
 	{
 		if ((*a)->rank <= pivot)
-		{
-			pb(a, b);
-			push_count++;
-		}
+			call_ops(a, b, "pb", &push_count);
 		else
-		{
-			ra(a);
-			rotate_count++;
-		}
-		i++;
+			call_ops(a, b, "ra", &rotate_count);
 	}
-	write(1, "aaaa\n", 5);
-	printf("i = %d  %d %d %d\n", i, rotate_count, push_count, size);
 	while (rotate_count--)
-	{
-		write (1, "loop\n", 5);
 		rra(a);
-	}
 	sort_a(a, b, size - push_count);
 	sort_b(a, b, push_count);
 }
