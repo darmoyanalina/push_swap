@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
+/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 21:23:15 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/02 14:59:45 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:05:07 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 void	swap(t_stack **st)
 {
-	t_stack *first;
-	t_stack *second;
+	t_stack	*first;
+	t_stack	*second;
 
 	if (!st || !*st || !(*st)->next)
-		return;
+		return ;
 	first = *st;
 	second = first->next;
 	*st = second;

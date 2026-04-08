@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   disorder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
+/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 14:58:09 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/01 12:59:43 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/08 20:37:06 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,3 @@ float	disorder(t_stack *st)
 	}
 	return (mistakes / total_pairs);
 }
-
-// int	main(void)
-// {
-// 	char *str = "-5 2    -300000000";
-// 	t_stack	*st = parse(&str);
-// 	printf("%d\n", compute_disorder(st));
-// 	return (0);
-// }

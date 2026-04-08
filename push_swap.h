@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/05 19:36:37 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:03:50 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ typedef struct d_list
 	struct d_list	*next;
 	struct d_list	*prev;
 }	t_stack;
+
+typedef struct ops
+{
+	int	sa;
+	int	sb;
+	int	ss;
+	int	pa;
+	int	pb;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+	int	overall;
+}	t_count;
 
 void	print_stack(t_stack *st);
 
@@ -48,15 +64,11 @@ void	err(void);
 void	check_duplicates(t_stack *st);
 void	sort_tiny(t_stack **st);
 void	insertion_sort(t_stack **st1, t_stack **st2);
-void	quick_sort(t_stack **a, t_stack **b);
+void	quick_sort(t_stack **a, t_stack **b, int start, int end);
 void	check_dup_f(void);
 void	free_stack(t_stack *st);
 void	ranking(t_stack *st);
 void	sort_array(int *contents, int size);
-void	sort_tiny_quick(t_stack **st, t_stack **st1, int size);
-void	sort_tiny_quick_rev(t_stack **st, t_stack **st1, int size);
-void	sort_a(t_stack **a, t_stack **b, int size);
-void	sort_b(t_stack **a, t_stack **b, int size);
 int		*get_array(t_stack *st);
 int		ft_lstsize(t_stack *lst);
 int		ft_atoi(const char *nptr);
@@ -65,7 +77,7 @@ int		ft_isval(int c);
 int		ft_strcmp(const char *s1, const char *s2);
 int		find_target(t_stack **st, int n);
 int		check_flags(char *str);
-int		pivot_val(t_stack *st, int size);
+int		sort(t_stack **a, t_stack **b, int start, int end);
 float	disorder(t_stack *st);
 char	**ft_split(char const *s, char c);
 t_stack	*parse(char **arg);
