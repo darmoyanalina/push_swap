@@ -58,20 +58,21 @@ void	check_dup_f(void)
 		err();
 }
 
-int	check_flags(char *str)
+int	check_flags(char *str, t_alg **c_algs)
 {
 	static int	bench;
 
 	if (!ft_strcmp(str, "--simple"))
-		return (check_dup_f(), 1);
+		return (check_dup_f(), (*c_algs)->algorithm = 1);
 	else if (!ft_strcmp(str, "--medium"))
-		return (check_dup_f(), 2);
+		return (check_dup_f(), (*c_algs)->algorithm = 2);
 	else if (!ft_strcmp(str, "--complex"))
-		return (check_dup_f(), 3);
+		return (check_dup_f(), (*c_algs)->algorithm = 3);
 	else if (!ft_strcmp(str, "--adaptive"))
-		return (check_dup_f(), 4);
+		return (check_dup_f(), (*c_algs)->adaptive = 1);
 	if (!ft_strcmp(str, "--bench"))
 	{
+		(*c_algs)->bench = 1;
 		bench++;
 		if (bench > 1)
 			err();

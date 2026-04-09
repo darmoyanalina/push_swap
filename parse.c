@@ -79,7 +79,7 @@ int	ft_atoi(const char *nptr)
 	return ((int)number);
 }
 
-t_stack	*parse(char **arg)
+t_stack	*parse(char **arg, t_alg **c_algs)
 {
 	char	**str;
 	char	**argv;
@@ -91,7 +91,7 @@ t_stack	*parse(char **arg)
 	st = NULL;
 	while (*argv)
 	{
-		if (!check_flags(*argv))
+		if (!check_flags(*argv, c_algs))
 		{
 			if (!validation(*argv))
 				err();

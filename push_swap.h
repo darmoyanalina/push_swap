@@ -49,6 +49,13 @@ typedef struct stacks
 	t_stack	**b;
 }	t_stacks;
 
+typedef struct algs
+{
+	int algorithm;
+	int adaptive;
+	int bench;
+}	t_alg;
+
 void		print_stack(t_stack *st);
 
 void		ft_lstadd_back(t_stack **lst, t_stack *new);
@@ -76,7 +83,9 @@ void		check_dup_f(void);
 void		free_stack(t_stack *st);
 void		ranking(t_stack *st);
 void		sort_array(int *contents, int size);
-void		bench(t_count *count, int disorder);
+void		bench(t_count *count, int disorder, t_alg *c_algs);
+void		call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count);
+void		choose_alg(t_stack **a, t_stack **b, char **argv, t_count *count);
 int			*get_array(t_stack *st);
 int			ft_lstsize(t_stack *lst);
 int			ft_atoi(const char *nptr);
@@ -84,14 +93,16 @@ int			validation(const char *arg);
 int			ft_isval(int c);
 int			ft_strcmp(const char *s1, const char *s2);
 int			find_target(t_stack **st, int n);
-int			check_flags(char *str);
+int			check_flags(char *str, t_alg **c_algs);
 int			sort(t_stacks *stacks, int start, int end, t_count *count);
 float		disorder(t_stack *st);
 char		**ft_split(char const *s, char c);
-t_stack		*parse(char **arg);
+t_stack		*parse(char **arg, t_alg **c_algs);
 t_stack		*ft_lstnew(int content);
 t_stack		*ft_lstlast(t_stack *lst);
 t_count		*op_init(t_count *count);
 t_stacks	*stacks_init(t_stacks *stacks, t_stack **a, t_stack **b);
+t_alg		*alg_init(t_alg *c_algs);
+t_alg		*modify(t_alg *c_algs, int dis);
 
 #endif

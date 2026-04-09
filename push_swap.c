@@ -67,31 +67,3 @@ t_stacks	*stacks_init(t_stacks *stacks, t_stack **a, t_stack **b)
 	stacks->b = b;
 	return (stacks);
 }
-
-int	main(int argc, char **argv)
-{
-	t_stack		*a;
-	t_stack		*b;
-	t_stacks	*stacks;
-	t_count	*count;
-	int		dis;
-
-	if (argc < 2)
-		return (0);
-	a = parse(&argv[1]);
-	b = NULL;
-	count = NULL;
-	stacks = NULL;
-	count = op_init(count);
-	stacks = stacks_init(stacks, &a, &b);
-	dis = disorder(a);
-	// insertion_sort(&a, &b);
-	quick_sort(stacks, 0, ft_lstsize(a) - 1, count);
-	// bench(count, dis);
-	// write (1, "a\n", 2);
-	// print_stack(a);
-	// write (1, "b\n", 2);
-	// print_stack(b);
-	free_stack(a);
-	return (0);
-}
