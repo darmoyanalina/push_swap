@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./ft_printf.h"
 
 void	print_stack(t_stack *st)
 {
@@ -39,11 +38,11 @@ void	free_stack(t_stack *st)
 	st = NULL;
 }
 
-void	op_init(t_count *count)
+t_count	*op_init(t_count *count)
 {
 	count = malloc(sizeof(t_count));
 	if (!count)
-		return ;
+		exit(0);
 	count->sa = 0;
 	count->sb = 0;
 	count->ss = 0;
@@ -56,24 +55,40 @@ void	op_init(t_count *count)
 	count->rrb = 0;
 	count->rrr = 0;
 	count->overall = 0;
+	return (count);
+}
+
+t_stacks	*stacks_init(t_stacks *stacks, t_stack **a, t_stack **b)
+{
+	stacks = malloc(sizeof(t_stacks));
+	if (!stacks)
+		exit(0);
+	stacks->a = a;
+	stacks->b = b;
+	return (stacks);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack		*a;
 	t_stack		*b;
+	t_stacks	*stacks;
 	t_count	*count;
+	int		dis;
 
 	if (argc < 2)
 		return (0);
 	a = parse(&argv[1]);
 	b = NULL;
 	count = NULL;
-	op_init(count);
+	stacks = NULL;
+	count = op_init(count);
+	stacks = stacks_init(stacks, &a, &b);
+	dis = disorder(a);
 	// insertion_sort(&a, &b);
-	quick_sort(&a, &b, 0, ft_lstsize(a) - 1);
+	quick_sort(stacks, 0, ft_lstsize(a) - 1, count);
+	// bench(count, dis);
 	// write (1, "a\n", 2);
-	// sort_tiny_rev(&a);
 	// print_stack(a);
 	// write (1, "b\n", 2);
 	// print_stack(b);

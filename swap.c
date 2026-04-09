@@ -31,45 +31,29 @@ void	swap(t_stack **st)
 	first->prev = second;
 }
 
-void	sa(t_stack	**a)
+void	sa(t_stack	**a, t_count *count)
 {
 	swap(a);
+	count->sa++;
+	count->overall++;
 	write(1, "sa\n", 3);
 }
 
-void	sb(t_stack **b)
+void	sb(t_stack **b, t_count *count)
 {
 	swap(b);
+	count->sb++;
+	count->overall++;
 	write(1, "sb\n", 3);
 }
 
-void	ss(t_stack	**a, t_stack	**b)
+void	ss(t_stack	**a, t_stack	**b, t_count *count)
 {
-	sa(a);
-	sb(b);
+	sa(a, count);
+	sb(b, count);
+	count->ss++;
+	count->sa--;
+	count->sb--;
+	count->overall--;
 	write(1, "ss\n", 3);
 }
-
-// int	main(void)
-// {
-// 	t_stack *a;
-// 	t_stack *b;
-
-// 	a = NULL;
-// 	b = NULL;
-// 	ft_lstadd_back(&a, ft_lstnew(2));
-// 	ft_lstadd_back(&a, ft_lstnew(4));
-// 	ft_lstadd_back(&a, ft_lstnew(8));
-// 	ft_lstadd_back(&b, ft_lstnew(12));
-// 	ft_lstadd_back(&b, ft_lstnew(52));
-// 	ft_lstadd_back(&b, ft_lstnew(17));
-
-// 	// printf("%d\n", a->next->content);
-// 	// swap(&a);
-// 	// sa(&a);
-// 	// sb(&b);
-// 	ss(&a, &b);
-// 	printf("%d\n", b->content);
-// 	printf("%d\n", a->content);
-
-// }

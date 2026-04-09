@@ -12,25 +12,25 @@
 
 #include "push_swap.h"
 
-void	sort_tiny(t_stack **st)
+void	sort_tiny(t_stack **st, t_count *count)
 {
 	if (!st || (*st)->next == NULL)
 		return ;
 	else if (ft_lstsize(*st) == 2)
 	{
 		if ((*st)->content > (*st)->next->content)
-			sa(st);
+			sa(st, count);
 	}
 	else if (ft_lstsize(*st) == 3)
 	{
 		while (disorder(*st) != 0)
 		{
 			if ((*st)->content > ft_lstlast(*st)->content)
-				ra(st);
+				ra(st, count);
 			else if ((*st)->content > (*st)->next->content)
-				sa(st);
+				sa(st, count);
 			else if ((*st)->next->content > ft_lstlast(*st)->content)
-				rra(st);
+				rra(st, count);
 		}
 	}
 }
@@ -59,7 +59,7 @@ int	find_target(t_stack **st, int n)
 	return (pos);
 }
 
-void	insertion_sort(t_stack **st1, t_stack **st2)
+void	insertion_sort(t_stack **st1, t_stack **st2, t_count *count)
 {
     int	pos;
     int	pos_bottom;
@@ -67,22 +67,22 @@ void	insertion_sort(t_stack **st1, t_stack **st2)
     int	save_pos_bottom;
 
 	if (ft_lstsize(*st1) <= 3)
-		sort_tiny(st1);
+		sort_tiny(st1, count);
 	else
 	{
-		pb(st1, st2);
-		pb(st1, st2);
+		pb(st1, st2, count);
+		pb(st1, st2, count);
 		if (*st2 && (*st2)->next && (*st2)->content < (*st2)->next->content)
-			sb(st2);
+			sb(st2, count);
 		//write(1, "loop\n", 5);
 		while (*st1)
 		{
 			if (*st2 && (*st1)->content > (*st2)->content)
-				pb(st1, st2);
+				pb(st1, st2, count);
 			else if (*st2 && (*st1)->content < ft_lstlast(*st2)->content)
 			{
-				pb(st1, st2);
-				rb(st2);
+				pb(st1, st2, count);
+				rb(st2, count);
 			}
 			else
 			{
@@ -94,7 +94,7 @@ void	insertion_sort(t_stack **st1, t_stack **st2)
 				{
 					while (pos)
 					{
-						rb(st2);
+						rb(st2, count);
 						pos--;
 					}
 				}
@@ -102,16 +102,16 @@ void	insertion_sort(t_stack **st1, t_stack **st2)
 				{
 					while (pos_bottom)
 					{
-						rrb(st2);
+						rrb(st2, count);
 						pos_bottom--;
 					}
 				}
-				pb(st1, st2);
+				pb(st1, st2, count);
 				if (save_pos < (ft_lstsize(*st2) - save_pos))
 				{
 					while (save_pos)
 					{
-						rrb(st2);
+						rrb(st2, count);
 						save_pos--;
 					}
 				}
@@ -119,13 +119,13 @@ void	insertion_sort(t_stack **st1, t_stack **st2)
 				{
 					while (save_pos_bottom)
 					{
-						rb(st2);
+						rb(st2, count);
 						save_pos_bottom--;
 					}
 				}
 			}
 		}
 		while (*st2)
-			pa(st1, st2);
+			pa(st1, st2, count);
 	}
 }

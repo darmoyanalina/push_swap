@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	sort(t_stack **a, t_stack **b, int start, int end)
+int	sort(t_stacks *stacks, int start, int end, t_count *count)
 {
 	int	pivot;
 	int	i;
@@ -23,28 +23,28 @@ int	sort(t_stack **a, t_stack **b, int start, int end)
 	rotate_count = 0;
 	while (i--)
 	{
-		if ((*a)->rank <= pivot)
-			pb(a, b);
+		if ((*(stacks->a))->rank <= pivot)
+			pb(stacks->a, stacks->b, count);
 		else
 		{
 			rotate_count++;
-			ra(a);
+			ra(stacks->a, count);
 		}
 	}
 	while (rotate_count--)
-		rra(a);
+		rra(stacks->a, count);
 	return (pivot);
 }
 
-void	quick_sort(t_stack **a, t_stack **b, int start, int end)
+void	quick_sort(t_stacks *stacks, int start, int end, t_count *count)
 {
 	int	pivot;
 
-	if (!disorder(*a) || end <= start)
+	if (!disorder(*(stacks->a)) || end <= start)
 		return ;
-	pivot = sort(a, b, start, end);
-	quick_sort(a, b, pivot + 1, end);
-	while (*b && (*b)->rank >= start)
-		pa(a, b);
-	quick_sort(a, b, start, pivot);
+	pivot = sort(stacks, start, end, count);
+	quick_sort(stacks, pivot + 1, end, count);
+	while (*(stacks->b) && (*(stacks->b))->rank >= start)
+		pa(stacks->a, stacks->b, count);
+	quick_sort(stacks, start, pivot, count);
 }

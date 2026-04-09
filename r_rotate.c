@@ -33,53 +33,30 @@ void	r_rotate(t_stack **st)
 	*st = last;
 }
 
-void	rra(t_stack **a)
+void	rra(t_stack **a, t_count *count)
 {
 	r_rotate(a);
+	count->rra++;
+	count->overall++;
 	write(1, "rra\n", 4);
 }
 
-void	rrb(t_stack **b)
+void	rrb(t_stack **b, t_count *count)
 {
 	r_rotate(b);
+	count->rrb++;
+	count->overall++;
 	write(1, "rrb\n", 4);
 }
 
-void	rrr(t_stack **a, t_stack **b)
+void	rrr(t_stack **a, t_stack **b, t_count *count)
 {
-	rra(a);
-	rrb(b);
+	rra(a, count);
+	rrb(b, count);
+	count->rrr++;
+	count->rra--;
+	count->rrb--;
+	count->overall--;
 	write(1, "rrr\n", 4);
 }
 
-// int	main(void)
-// {
-// 	t_stack *a;
-// 	t_stack *b;
-
-// 	a = NULL;
-// 	b = NULL;
-// 	ft_lstadd_back(&a, ft_lstnew(2));
-// 	ft_lstadd_back(&a, ft_lstnew(4));
-// 	ft_lstadd_back(&a, ft_lstnew(54));
-// 	ft_lstadd_back(&a, ft_lstnew(8));
-// 	ft_lstadd_back(&b, ft_lstnew(12));
-// 	ft_lstadd_back(&b, ft_lstnew(52));
-// 	ft_lstadd_back(&b, ft_lstnew(22));
-// 	ft_lstadd_back(&b, ft_lstnew(17));
-
-// 	rrr(&a, &b);
-// 	t_stack	*tmp = a;
-// 	while (tmp)
-// 	{
-// 		printf("%d\n", tmp->content);
-// 		tmp = tmp->next;
-// 	}
-// 	printf("aaaa\n");
-// 	tmp = b;
-// 	while (tmp)
-// 	{
-// 		printf("%d\n", tmp->content);
-// 		tmp = tmp->next;
-// 	}
-// }

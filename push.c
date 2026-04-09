@@ -38,33 +38,19 @@ void	push(t_stack **st1, t_stack **st2)
 	}
 }
 
-void	pa(t_stack	**a, t_stack **b)
+void	pa(t_stack	**a, t_stack **b, t_count *count)
 {
 	push(a, b);
+	count->pa++;
+	count->overall++;
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_stack	**a, t_stack **b)
+void	pb(t_stack	**a, t_stack **b, t_count *count)
 {
 	push(b, a);
+	count->pb++;
+	count->overall++;
 	write(1, "pb\n", 3);
 }
 
-// int	main(void)
-// {
-// 	t_stack *a;
-// 	t_stack *b;
-
-// 	a = NULL;
-// 	b = NULL;
-// 	ft_lstadd_back(&a, ft_lstnew(2));
-// 	ft_lstadd_back(&a, ft_lstnew(4));
-// 	ft_lstadd_back(&b, ft_lstnew(8));
-// 	ft_lstadd_back(&b, ft_lstnew(12));
-
-// 	// pa(&a, &b);
-// 	pb(&a, &b);
-// 	printf("%d\n", b->content);
-// 	printf("%d", a->content);
-
-// }
