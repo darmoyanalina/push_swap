@@ -19,7 +19,8 @@ SRC = push_swap.c \
       quick_sort.c \
       ranking.c \
       main.c \
-      bench.c
+      bench.c \
+      medium_sort.c
 
 OBJ := $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:58 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/10 14:49:28 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/10 17:59:19 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_stack(t_stack *st)
 	}
 }
 
-void	free_stack(t_stack *st)
+void	free_stack(t_stack *st, t_stacks *sts)
 {
 	t_stack	*tmp;
 
@@ -36,6 +36,8 @@ void	free_stack(t_stack *st)
 		st = tmp;
 	}
 	st = NULL;
+	free(sts);
+	sts = NULL;
 }
 
 t_count	*op_init(t_count *count)

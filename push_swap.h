@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/10 14:17:30 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/10 17:58:45 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ void		sort_tiny(t_stack **st, t_count *count);
 void		insertion_sort(t_stack **st1, t_stack **st2, t_count *count);
 void		quick_sort(t_stacks *stacks, int start, int end, t_count *count);
 void		check_dup_f(void);
-void		free_stack(t_stack *st);
+void		free_stack(t_stack *st, t_stacks *sts);
 void		ranking(t_stack *st);
 void		sort_array(int *contents, int size);
 void		bench(t_count *count, float disorder, t_alg *c_algs);
 void		call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count);
 void		choose_alg(t_stack *a, t_stack *b, char **argv, t_count *count);
+void		medium_sort(t_stack **a, t_stack **b, t_count *count);
 int			*get_array(t_stack *st);
 int			ft_lstsize(t_stack *lst);
 int			ft_atoi(const char *nptr);
@@ -93,6 +94,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 int			find_target(t_stack **st, int n);
 int			check_flags(char *str, t_alg **c_algs);
 int			sort(t_stacks *stacks, int start, int end, t_count *count);
+int			get_chunk_size(int max_index);
 float		disorder(t_stack *st);
 char		**ft_split(char const *s, char c);
 t_stack		*parse(char **arg, t_alg **c_algs);
