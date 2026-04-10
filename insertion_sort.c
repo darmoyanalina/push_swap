@@ -6,7 +6,7 @@
 /*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 17:16:51 by neohanya          #+#    #+#             */
-/*   Updated: 2026/04/02 20:21:17 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/09 18:56:27 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ void	sort_tiny(t_stack **st, t_count *count)
 		return ;
 	else if (ft_lstsize(*st) == 2)
 	{
-		if ((*st)->content > (*st)->next->content)
+		if ((*st)->rank > (*st)->next->rank)
 			sa(st, count);
 	}
 	else if (ft_lstsize(*st) == 3)
 	{
 		while (disorder(*st) != 0)
 		{
-			if ((*st)->content > ft_lstlast(*st)->content)
+			if ((*st)->rank > ft_lstlast(*st)->rank)
 				ra(st, count);
-			else if ((*st)->content > (*st)->next->content)
+			else if ((*st)->rank > (*st)->next->rank)
 				sa(st, count);
-			else if ((*st)->next->content > ft_lstlast(*st)->content)
+			else if ((*st)->next->rank > ft_lstlast(*st)->rank)
 				rra(st, count);
 		}
 	}
@@ -38,19 +38,19 @@ void	sort_tiny(t_stack **st, t_count *count)
 int	find_target(t_stack **st, int n)
 {
 	t_stack		*temp;
-    int			count;
-    int			value;
-    int			pos;
+	int			count;
+	int			value;
+	int			pos;
 
 	temp = *st;
 	count = 0;
-	value = INT_MAX;
-	pos = 0;
+	value = INT_MIN;
+	pos = -1;
 	while (temp)
 	{
-		if (temp->content > n && temp->content < value)
+		if (temp->rank < n && temp->rank > value)
 		{
-			value = temp->content;
+			value = temp->rank;
 			pos = count;
 		}
 		temp = temp->next;
@@ -59,72 +59,45 @@ int	find_target(t_stack **st, int n)
 	return (pos);
 }
 
+static void	insert_to_b(t_stack **st2, t_stack **st1, t_count *count)
+{
+	int	pos;
+	int	save;
+
+	if (!(*st2) || (*st1)->rank > (*st2)->rank)
+	{
+		pb(st1, st2, count);
+		return ;
+	}
+	pos = find_target(st2, (*st1)->rank);
+	if (pos == -1)
+	{
+		pb(st1, st2, count);
+		rb(st2, count);
+		return ;
+	}
+	save = pos;
+	while (pos-- > 0)
+		rb(st2, count);
+	pb(st1, st2, count);
+	while (save-- > 0)
+		rrb(st2, count);
+}
+
 void	insertion_sort(t_stack **st1, t_stack **st2, t_count *count)
 {
-    int	pos;
-    int	pos_bottom;
-    int	save_pos;
-    int	save_pos_bottom;
-
 	if (ft_lstsize(*st1) <= 3)
 		sort_tiny(st1, count);
 	else
 	{
 		pb(st1, st2, count);
 		pb(st1, st2, count);
-		if (*st2 && (*st2)->next && (*st2)->content < (*st2)->next->content)
+		if (*st2 && (*st2)->next && (*st2)->rank < (*st2)->next->rank)
 			sb(st2, count);
-		//write(1, "loop\n", 5);
 		while (*st1)
-		{
-			if (*st2 && (*st1)->content > (*st2)->content)
-				pb(st1, st2, count);
-			else if (*st2 && (*st1)->content < ft_lstlast(*st2)->content)
-			{
-				pb(st1, st2, count);
-				rb(st2, count);
-			}
-			else
-			{
-				pos = find_target(st2, (*st1)->content);
-				pos_bottom = ft_lstsize(*st2) - pos;
-				save_pos = pos;
-				save_pos_bottom = pos_bottom;
-				if (pos < (ft_lstsize(*st2) - pos))
-				{
-					while (pos)
-					{
-						rb(st2, count);
-						pos--;
-					}
-				}
-				else
-				{
-					while (pos_bottom)
-					{
-						rrb(st2, count);
-						pos_bottom--;
-					}
-				}
-				pb(st1, st2, count);
-				if (save_pos < (ft_lstsize(*st2) - save_pos))
-				{
-					while (save_pos)
-					{
-						rrb(st2, count);
-						save_pos--;
-					}
-				}
-				else
-				{
-					while (save_pos_bottom)
-					{
-						rb(st2, count);
-						save_pos_bottom--;
-					}
-				}
-			}
-		}
+			insert_to_b(st2, st1, count);
+		while (*st2 && (*st2)->rank != ft_lstsize(*st2) - 1)
+			rb(st2, count);
 		while (*st2)
 			pa(st1, st2, count);
 	}

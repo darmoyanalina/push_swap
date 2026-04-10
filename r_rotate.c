@@ -6,7 +6,7 @@
 /*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 15:48:43 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/02 14:59:26 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:09:57 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	r_rotate(t_stack **st)
 		return ;
 	first = *st;
 	last = ft_lstlast(*st);
-	if (last->prev == first)
-	{
-		swap(st);
-		return ;
-	}
+	// if (last->prev == first)
+	// {
+	// 	swap(st);
+	// 	return ;
+	// }
 	last->prev->next = NULL;
 	last->prev = NULL;
 	last->next = first;
