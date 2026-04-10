@@ -6,18 +6,16 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/08 21:03:50 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:17:30 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <unistd.h>
-# include <stdlib.h>
 # include <limits.h>
 # include <stdio.h>
-// #include "./ft_printf.h"
+#include "ft_printf/ft_printf.h"
 
 typedef struct d_list
 {
@@ -83,9 +81,9 @@ void		check_dup_f(void);
 void		free_stack(t_stack *st);
 void		ranking(t_stack *st);
 void		sort_array(int *contents, int size);
-void		bench(t_count *count, int disorder, t_alg *c_algs);
+void		bench(t_count *count, float disorder, t_alg *c_algs);
 void		call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count);
-void		choose_alg(t_stack **a, t_stack **b, char **argv, t_count *count);
+void		choose_alg(t_stack *a, t_stack *b, char **argv, t_count *count);
 int			*get_array(t_stack *st);
 int			ft_lstsize(t_stack *lst);
 int			ft_atoi(const char *nptr);
@@ -103,6 +101,6 @@ t_stack		*ft_lstlast(t_stack *lst);
 t_count		*op_init(t_count *count);
 t_stacks	*stacks_init(t_stacks *stacks, t_stack **a, t_stack **b);
 t_alg		*alg_init(t_alg *c_algs);
-t_alg		*modify(t_alg *c_algs, int dis);
+t_alg		*modify(t_alg *c_algs, float dis);
 
 #endif

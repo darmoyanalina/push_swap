@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:58 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/08 21:10:34 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/10 13:35:20 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_stack(t_stack *st)
 	stc = st;
 	while (stc)
 	{
-		printf("%d rank = %d\n", stc->content, stc->rank);
+		ft_printf("%d rank = %d\n", stc->content, stc->rank);
 		stc = stc->next;
 	}
 }

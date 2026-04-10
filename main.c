@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 14:17:57 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/09 14:17:57 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:17:15 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_alg	*alg_init(t_alg *c_algs)
 	return (c_algs);
 }
 
-t_alg	*modify(t_alg *c_algs, int dis)
+t_alg	*modify(t_alg *c_algs, float dis)
 {
 	c_algs->adaptive = 1;
 	if (dis < 0.2)
@@ -37,9 +37,10 @@ t_alg	*modify(t_alg *c_algs, int dis)
 
 void	call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count)
 {
-	int		dis;
+	float		dis;
 
 	dis = disorder(*(stacks->a));
+	// printf()
 	if (c_algs->algorithm == 1)
 		insertion_sort(stacks->a, stacks->b, count);
 	else if (c_algs->algorithm == 2)
@@ -60,7 +61,7 @@ void	call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count)
 		bench(count, dis, c_algs);
 }
 
-void	choose_alg(t_stack **a, t_stack **b, char **argv, t_count *count)
+void	choose_alg(t_stack *a, t_stack *b, char **argv, t_count *count)
 {
 	t_stacks	*stacks;
 	t_alg		*c_algs;
@@ -68,8 +69,9 @@ void	choose_alg(t_stack **a, t_stack **b, char **argv, t_count *count)
 	stacks = NULL;
 	c_algs = NULL;
 	c_algs = alg_init(c_algs);
-	*a = parse(&argv[1], &c_algs);
-	stacks = stacks_init(stacks, a, b);
+
+	a = parse(&argv[1], &c_algs);
+	stacks = stacks_init(stacks, &a, &b);
 	call_sort(stacks, c_algs, count);
 }
 
@@ -85,7 +87,7 @@ int	main(int argc, char **argv)
 	b = NULL;
 	count = NULL;
 	count = op_init(count);
-	choose_alg(&a, &b, argv, count);
+	choose_alg(a, b, argv, count);
 	// insertion_sort(&a, &b);
 	// quick_sort(stacks, 0, ft_lstsize(a) - 1, count);
 	// bench(count, dis);

@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:18:07 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/05 18:50:40 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/10 13:58:43 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,26 +109,9 @@ t_stack	*parse(char **arg, t_alg **c_algs)
 				free(str[i++]);
 			free(str);
 			check_duplicates(st);
-			argv++;
 		}
-		else
-		{
-			argv++;
-		}
+		argv++;
 	}
 	ranking(st);
 	return (st);
 }
-
-// int	main(void)
-// {
-// 	char *str = "553000";
-// 	t_stack	*st = parse(&str);
-// 	t_stack	*tmp = st;
-// 	while (tmp)
-// 	{
-// 		printf("%d\n", tmp->content);
-// 		tmp = tmp->next;
-// 	}
-// 	return (0);
-// }

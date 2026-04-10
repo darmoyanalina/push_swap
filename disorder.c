@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 14:58:09 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/08 20:37:06 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:06:36 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ float	disorder(t_stack *st)
 		while (cur2)
 		{
 			total_pairs++;
-			if (cur1->content > cur2->content)
+			if (cur1->rank > cur2->rank)
 				mistakes++;
 			cur2 = cur2->next;
 		}
