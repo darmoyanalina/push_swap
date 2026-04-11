@@ -6,26 +6,11 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:18:07 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/11 13:17:59 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/11 14:10:30 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	err(t_alg *c_algs, t_count *count)
-{
-	write (2, "Error\n", 6);
-	free_algs(c_algs, count);
-	exit(1);
-}
-
-int	ft_isval(int c)
-{
-	if ((c >= '0' && c <= '9') || (c >= 9 && c <= 13) || c == ' ')
-		return (1);
-	else
-		return (0);
-}
 
 int	validation(const char *arg)
 {
@@ -80,13 +65,30 @@ int	ft_atoi(const char *nptr, t_alg **c_algs, t_count **count)
 	return ((int)number);
 }
 
+void	parse_helper(char ***str, t_alg **c_algs, t_count **count, t_stack **st)
+{
+	int		i;
+	int		n;
+
+	i = 0;
+	n = 0;
+	while ((*str)[i])
+	{
+		n = ft_atoi((*str)[i], c_algs, count);
+		ft_lstadd_back(st, ft_lstnew(n));
+		i++;
+	}
+	i = 0;
+	while ((*str)[i])
+		free((*str)[i++]);
+	free(*str);
+}
+
 t_stack	*parse(char **arg, t_alg **c_algs, t_count **count)
 {
 	char	**str;
 	char	**argv;
 	t_stack	*st;
-	int		i;
-	int		n;
 
 	argv = arg;
 	st = NULL;
@@ -97,18 +99,7 @@ t_stack	*parse(char **arg, t_alg **c_algs, t_count **count)
 			if (!validation(*argv))
 				err(*c_algs, *count);
 			str = ft_split(*argv, ' ');
-			i = 0;
-			n = 0;
-			while (str[i])
-			{
-				n = ft_atoi(str[i], c_algs, count);
-				ft_lstadd_back(&st, ft_lstnew(n));
-				i++;
-			}
-			i = 0;
-			while (str[i])
-				free(str[i++]);
-			free(str);
+			parse_helper(&str, c_algs, count, &st);
 			check_duplicates(st, c_algs, count);
 		}
 		argv++;

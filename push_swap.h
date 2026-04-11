@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/11 13:33:31 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/11 14:11:52 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void		bench(t_count *count, float disorder, t_alg *c_algs);
 void		call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count);
 void		choose_alg(t_stack *a, t_stack *b, char **argv, t_count *count);
 void		medium_sort(t_stacks *stacks, t_count *count);
+void		parse_helper(char ***str, t_alg **algs, t_count **c, t_stack **st);
 int			*get_array(t_stack *st);
 int			ft_lstsize(t_stack *lst);
 int			ft_atoi(const char *nptr, t_alg **c_algs, t_count **count);
