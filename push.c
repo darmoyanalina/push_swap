@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 20:12:29 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/03 16:37:21 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/11 13:33:41 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ void	pb(t_stack	**a, t_stack **b, t_count *count)
 	count->overall++;
 	write(1, "pb\n", 3);
 }
-

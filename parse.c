@@ -6,15 +6,16 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:18:07 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/10 13:58:43 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/11 13:17:59 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	err(void)
+void	err(t_alg *c_algs, t_count *count)
 {
 	write (2, "Error\n", 6);
+	free_algs(c_algs, count);
 	exit(1);
 }
 
@@ -51,7 +52,7 @@ int	validation(const char *arg)
 	return (1);
 }
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr, t_alg **c_algs, t_count **count)
 {
 	long	number;
 	int		i;
@@ -75,11 +76,11 @@ int	ft_atoi(const char *nptr)
 	}
 	number *= sign;
 	if (number > INT_MAX || number < INT_MIN)
-		err();
+		err(*c_algs, *count);
 	return ((int)number);
 }
 
-t_stack	*parse(char **arg, t_alg **c_algs)
+t_stack	*parse(char **arg, t_alg **c_algs, t_count **count)
 {
 	char	**str;
 	char	**argv;
@@ -91,16 +92,16 @@ t_stack	*parse(char **arg, t_alg **c_algs)
 	st = NULL;
 	while (*argv)
 	{
-		if (!check_flags(*argv, c_algs))
+		if (!check_flags(*argv, c_algs, count))
 		{
 			if (!validation(*argv))
-				err();
+				err(*c_algs, *count);
 			str = ft_split(*argv, ' ');
 			i = 0;
 			n = 0;
 			while (str[i])
 			{
-				n = ft_atoi(str[i]);
+				n = ft_atoi(str[i], c_algs, count);
 				ft_lstadd_back(&st, ft_lstnew(n));
 				i++;
 			}
@@ -108,7 +109,7 @@ t_stack	*parse(char **arg, t_alg **c_algs)
 			while (str[i])
 				free(str[i++]);
 			free(str);
-			check_duplicates(st);
+			check_duplicates(st, c_algs, count);
 		}
 		argv++;
 	}

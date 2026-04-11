@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 12:11:25 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/10 14:13:36 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/11 13:41:00 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ const char	*strategy(t_alg *c_algs)
 void	bench(t_count *count, float disorder, t_alg *c_algs)
 {
 	const char	*strategy_c;
+	int			dis;
+	int			dis_rm;
 
 	strategy_c = strategy(c_algs);
-	ft_printf("[bench] disorder: %d.%d%%\n", (int)(disorder * 100), (int)((int)(disorder * 10000) % 100));
+	dis = (int)(disorder * 100);
+	dis_rm = (int)((int)(disorder * 10000) % 100);
+	ft_printf("[bench] disorder: %d.%d%%\n", dis, dis_rm);
 	ft_printf("[bench] strategy: %s\n", strategy_c);
 	ft_printf("[bench] total_ops: %d\n", count->overall);
 	ft_printf("[bench] sa: %d sb: %d ss: %d ", count->sa, count->sb, count->ss);

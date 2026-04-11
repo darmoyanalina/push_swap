@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:58 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/10 17:59:19 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/11 13:11:59 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,12 @@ t_stacks	*stacks_init(t_stacks *stacks, t_stack **a, t_stack **b)
 	stacks->a = a;
 	stacks->b = b;
 	return (stacks);
+}
+
+void	free_algs(t_alg *c_algs, t_count *count)
+{
+	free(c_algs);
+	free(count);
+	c_algs = NULL;
+	count = NULL;
 }
