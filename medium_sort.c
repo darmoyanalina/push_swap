@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 17:22:44 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/11 13:35:34 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/11 18:27:51 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,50 +26,29 @@ int	get_chunk_size(int max_index)
 
 void	back_to_a(t_stack **a, t_stack **b, t_count *count)
 {
-	int	size;
-
-	size = ft_lstsize(*b) - 1;
 	while (*b)
-	{
-		if ((*b)->rank == size)
-		{
-			pa(a, b, count);
-			size--;
-		}
-		else if (find_target(b, size) < size / 2)
-		{
-			while ((*b)->rank != size)
-				rb(b, count);
-		}
-		else
-		{
-			while ((*b)->rank != size)
-				rrb(b, count);
-		}
-	}
+		pa(a, b, count);
 }
 
-int	cond_for_b(t_stack **b, int chunk_size, int i)
-{
-	int	start;
-	int	end;
+// int	cond_for_b(t_stack **b, int chunk_size, int i)
+// {
+// 	int	start;
+// 	int	end;
 
-	start = chunk_size * i;
-	end = chunk_size * (i + 1);
-	if ((*b)->rank < start + ((end - start) / 2))
-		return (1);
-	return (0);
-}
+// 	start = chunk_size * i;
+// 	end = chunk_size * (i + 1);
+// 	if ((*b)->rank < start + ((end - start) / 2))
+// 		return (1);
+// 	return (0);
+// }
 
 void	push_rotate(t_stacks *stacks, int chunk_size, int i, t_count *count)
 {
+	if (!(*(stacks->a)))
+		return ;
 	if ((*(stacks->a))->rank >= (chunk_size * i)
 		&& (*(stacks->a))->rank < (chunk_size * (i + 1)))
-	{
-		pb(stacks->a, stacks->b, count);
-		if (cond_for_b(stacks->b, chunk_size, i))
-			rb(stacks->b, count);
-	}
+		insert_to_b(stacks->b, stacks->a, count);
 	else
 		ra(stacks->a, count);
 }

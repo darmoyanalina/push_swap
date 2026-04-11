@@ -21,7 +21,8 @@ SRC = push_swap.c \
       main.c \
       bench.c \
       medium_sort.c \
-      parsing_utils.c
+      parsing_utils.c \
+      insert_utils.c
 
 OBJ := $(SRC:.c=.o)
 

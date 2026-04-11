@@ -6,7 +6,7 @@
 /*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 17:16:51 by neohanya          #+#    #+#             */
-/*   Updated: 2026/04/09 18:56:27 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/11 18:24:31 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ void	sort_tiny(t_stack **st, t_count *count)
 	}
 }
 
+void	sort_four_five(t_stack **st1, t_stack **st2, t_count *count)
+{
+	if (ft_lstsize(*st1) == 5)
+		pb(st1, st2, count);
+	pb(st1, st2, count);
+	sort_tiny(st1, count);
+	while (*st2)
+		insert_to_a(st1, st2, count);
+}
+
 int	find_target(t_stack **st, int n)
 {
 	t_stack		*temp;
@@ -59,7 +69,7 @@ int	find_target(t_stack **st, int n)
 	return (pos);
 }
 
-static void	insert_to_b(t_stack **st2, t_stack **st1, t_count *count)
+void	insert_to_b(t_stack **st2, t_stack **st1, t_count *count)
 {
 	int	pos;
 	int	save;
@@ -88,6 +98,8 @@ void	insertion_sort(t_stack **st1, t_stack **st2, t_count *count)
 {
 	if (ft_lstsize(*st1) <= 3)
 		sort_tiny(st1, count);
+	else if (ft_lstsize(*st1) <= 5)
+		sort_four_five(st1, st2, count);
 	else
 	{
 		pb(st1, st2, count);

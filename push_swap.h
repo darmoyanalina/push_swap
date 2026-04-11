@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/11 14:11:52 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/11 18:25:07 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void		call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count);
 void		choose_alg(t_stack *a, t_stack *b, char **argv, t_count *count);
 void		medium_sort(t_stacks *stacks, t_count *count);
 void		parse_helper(char ***str, t_alg **algs, t_count **c, t_stack **st);
+void		sort_four_five(t_stack **st1, t_stack **st2, t_count *count);
+void		insert_to_a(t_stack **st1, t_stack **st2, t_count *count);
+void		insert_to_b(t_stack **st2, t_stack **st1, t_count *count);
 int			*get_array(t_stack *st);
 int			ft_lstsize(t_stack *lst);
 int			ft_atoi(const char *nptr, t_alg **c_algs, t_count **count);
