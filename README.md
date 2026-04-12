@@ -6,7 +6,7 @@ The `push_swap` project is an algorithmic challenge where the goal is to sort a 
 
  - Stack $a$: Contains a random amount of negative and/or positive numbers without any duplicates at the start.
  - Stack $b$: Is initially empty.
- - Goal: Sort the numbers in stack $a$ in ascending order.
+ - Goal: Sort the numbers in stack $a$ in ascending order and maybe lose interest in life.
 
 ---
 
@@ -38,21 +38,17 @@ This implementation includes **four different sorting strategies**, selected dep
 
 A basic sorting strategy used for small or nearly sorted inputs.
 
-Example approaches:
-- insertion-style sorting
-- selection-style sorting
-- simple minimum extraction
-
+We used an insertion sort for this cases.
 This approach is simple but inefficient for large inputs.
 
 ---
 
 ### 2️⃣ Medium Algorithm — O(n√n)
 
-For medium complexity inputs, the program divides the dataset into **chunks**.
+For medium complexity inputs we chose the chunk sort. The program divides the dataset into **chunks**.
 
 Steps:
-1. Split numbers into √n chunks
+1. Split numbers into nearly √n chunks
 2. Push chunk ranges into stack **b**
 3. Reassemble them back into **a** in sorted order
 
@@ -60,18 +56,19 @@ This significantly reduces the number of operations compared to naive sorting.
 
 ---
 
-### 3️⃣ Complex Algorithm — O(n log n)
+### 3️⃣ Complex Algorithm — O(nlogn)
 
 For large or highly disordered inputs, a more efficient algorithm is required.
 
-The most common solution is **Radix Sort adapted for stacks**.
+The most common solution is Radix Sort adapted for stacks, but, regardless of the endless tries of Razmik to convince us to use the Radix Sort, we chose the **Quick Sort**.
+I, to be honest, do not understand why everyone chose Radix Sort. Ok, it's interestig, it's cool to do everything in bits and it seems like some sort of a magic happened, but the Quick Sort is great too. I used rankings of the elements of the stack for it. The ranking is the index of an element when the stack is already sorted: the index it "desires" to have. And I gave the opportunity to them.
 
 Steps:
-1. Normalize numbers into indexes
-2. Sort using bitwise operations
-3. Push and rotate elements between stacks
+1. Place the element with the middle rank in the middle of stack a (put the elements smaller than it on top of it (near the top  of the stack) and greater elements under it)
+2. Recursively call Quick Sort for the top half
+3. Recursively call Quick Sort for the bottom half
 
-Radix sort performs well because it guarantees **O(n log n)** complexity in the push_swap operation model.
+Because of **devide and conquer** strategy it works in **O(nlogn)** time.
 
 ---
 
@@ -229,13 +226,17 @@ and algorithm implementation.
 
 ---
 
+### Peer to Peer
+
+- This is, in my opinion, the **most important** resource and part
+- We couldn't to this without the help of our peers
+
 ### AI Usage
 
 AI tools were used as a learning aid during this project for:
 
 - explaining algorithmic complexity concepts
 - helping structure project documentation
-- reviewing README formatting
 - providing debugging hints during development
 
 All algorithms, implementation logic, and final code were written manually.
