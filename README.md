@@ -199,22 +199,6 @@ C programming, algorithm design, and performance optimization.
 
 ---
 
-### Algorithms and Complexity
-
-- **Analysis of Algorithms — Wikipedia**
-  https://en.wikipedia.org/wiki/Analysis_of_algorithms
-
-- **Sorting Algorithm — Wikipedia**
-  https://en.wikipedia.org/wiki/Sorting_algorithm
-
-- **Radix Sort — Wikipedia**
-  https://en.wikipedia.org/wiki/Radix_sort
-
-- **Big-O Notation — Wikipedia**
-  https://en.wikipedia.org/wiki/Big_O_notation
-
----
-
 ### Tutorials and Learning Resources
 
 - https://makefiletutorial.com
