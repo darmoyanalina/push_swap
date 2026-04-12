@@ -6,7 +6,7 @@
 /*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 14:17:57 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/12 13:31:53 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/12 13:50:25 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count)
 	}
 	if (c_algs->bench)
 		bench(count, dis, c_algs);
-	//printf("disorder: %f\n", disorder(*(stacks->a)));
+	printf("disorder: %f\n", disorder(*(stacks->a)));
 	if (!dis)
 		return ;
 }

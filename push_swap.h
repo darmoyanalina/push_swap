@@ -6,7 +6,7 @@
 /*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/12 13:28:50 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/12 13:49:46 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ void		parse_helper(char ***str, t_alg **algs, t_count **c, t_stack **st);
 void		sort_four_five(t_stack **st1, t_stack **st2, t_count *count);
 void		insert_to_a(t_stack **st1, t_stack **st2, t_count *count);
 void		insert_to_b(t_stack **st2, t_stack **st1, t_count *count);
+void		bring_to_top(t_stack **a, int pos, t_count *count);
+void		place_in_b(t_stack **b, int pos_b, t_count *count);
+void		insert_to_b(t_stack **st2, t_stack **st1, t_count *count);
 int			*get_array(t_stack *st);
 int			ft_lstsize(t_stack *lst);
 int			ft_atoi(const char *nptr, t_alg **c_algs, t_count **count);
@@ -99,6 +102,7 @@ int			find_target(t_stack **st, int n);
 int			check_flags(char *str, t_alg **c_algs, t_count **count);
 int			sort(t_stacks *stacks, int start, int end, t_count *count);
 int			get_chunk_size(int max_index);
+int			cost_for_rank(t_stack **a, t_stack **b, int rank, int idx);
 float		disorder(t_stack *st);
 char		**ft_split(char const *s, char c);
 t_stack		*parse(char **arg, t_alg **c_algs, t_count **count);
