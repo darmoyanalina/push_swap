@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
+/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 17:22:44 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/11 18:27:51 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/12 11:39:41 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,36 @@ int	get_chunk_size(int max_index)
 
 void	back_to_a(t_stack **a, t_stack **b, t_count *count)
 {
+	int	pos;
+	int	size;
+
 	while (*b)
+	{
+		size = ft_lstsize(*b);
+		pos = find_max_pos(*b);
+		if (pos <= size / 2)
+		{
+			while (pos-- > 0)
+				rb(b, count);
+		}
+		else
+		{
+			while (pos++ < size)
+				rrb(b, count);
+		}
 		pa(a, b, count);
+	}
 }
-
-// int	cond_for_b(t_stack **b, int chunk_size, int i)
-// {
-// 	int	start;
-// 	int	end;
-
-// 	start = chunk_size * i;
-// 	end = chunk_size * (i + 1);
-// 	if ((*b)->rank < start + ((end - start) / 2))
-// 		return (1);
-// 	return (0);
-// }
 
 void	push_rotate(t_stacks *stacks, int chunk_size, int i, t_count *count)
 {
+	int	rank;
+
 	if (!(*(stacks->a)))
 		return ;
-	if ((*(stacks->a))->rank >= (chunk_size * i)
-		&& (*(stacks->a))->rank < (chunk_size * (i + 1)))
-		insert_to_b(stacks->b, stacks->a, count);
+	rank = (*(stacks->a))->rank;
+	if (rank >= chunk_size * i && rank < chunk_size * (i + 1))
+		insert_to_b_hybrid(stacks, chunk_size, i, count);
 	else
 		ra(stacks->a, count);
 }
