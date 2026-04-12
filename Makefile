@@ -1,6 +1,6 @@
 NAME := push_swap
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g3
 
 FT_PRINTF_DIR := ./ft_printf
 FT_PRINTF := $(FT_PRINTF_DIR)/libftprintf.a

@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:18:07 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/11 14:10:30 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/12 17:54:44 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	validation(const char *arg)
 			return (result);
 		if ((arg[i] >= 9 && arg[i] <= 13) || arg[i] == ' ')
 			empty++;
+		if ((arg[i] == '+' || arg[i] == '-')
+			&& (arg[i + 1] == '\0' || (arg[i + 1] >= 9 && arg[i + 1] <= 13)
+				|| arg [i + 1] == ' '))
+			return (result);
 		i++;
 	}
 	if (empty == i)
@@ -37,7 +41,7 @@ int	validation(const char *arg)
 	return (1);
 }
 
-int	ft_atoi(const char *nptr, t_alg **c_algs, t_count **count)
+int	ft_atoi(const char *nptr, t_alg **c_algs, t_count **count, t_stack *st)
 {
 	long	number;
 	int		i;
@@ -61,7 +65,7 @@ int	ft_atoi(const char *nptr, t_alg **c_algs, t_count **count)
 	}
 	number *= sign;
 	if (number > INT_MAX || number < INT_MIN)
-		err(*c_algs, *count);
+		err(*c_algs, *count, st);
 	return ((int)number);
 }
 
@@ -74,7 +78,7 @@ void	parse_helper(char ***str, t_alg **c_algs, t_count **count, t_stack **st)
 	n = 0;
 	while ((*str)[i])
 	{
-		n = ft_atoi((*str)[i], c_algs, count);
+		n = ft_atoi((*str)[i], c_algs, count, *st);
 		ft_lstadd_back(st, ft_lstnew(n));
 		i++;
 	}
@@ -94,10 +98,10 @@ t_stack	*parse(char **arg, t_alg **c_algs, t_count **count)
 	st = NULL;
 	while (*argv)
 	{
-		if (!check_flags(*argv, c_algs, count))
+		if (!check_flags(*argv, c_algs, count, NULL))
 		{
 			if (!validation(*argv))
-				err(*c_algs, *count);
+				err(*c_algs, *count, st);
 			str = ft_split(*argv, ' ');
 			parse_helper(&str, c_algs, count, &st);
 			check_duplicates(st, c_algs, count);

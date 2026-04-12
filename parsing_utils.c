@@ -6,16 +6,17 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:10:07 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/11 14:10:50 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/12 17:12:20 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	err(t_alg *c_algs, t_count *count)
+void	err(t_alg *c_algs, t_count *count, t_stack *st)
 {
 	write (2, "Error\n", 6);
 	free_algs(c_algs, count);
+	free_stack(st, NULL);
 	exit(1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:49 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/12 14:21:58 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/12 17:42:08 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void		r_rotate(t_stack **st);
 void		rra(t_stack **a, t_count *count);
 void		rrb(t_stack **b, t_count *count);
 void		rrr(t_stack **a, t_stack **b, t_count *count);
-void		err(t_alg *c_algs, t_count *count);
+void		err(t_alg *c_algs, t_count *count, t_stack *st);
 void		check_duplicates(t_stack *st, t_alg **c_algs, t_count **count);
 void		sort_tiny(t_stack **st, t_count *count);
 void		insertion_sort(t_stack **st1, t_stack **st2, t_count *count);
 void		quick_sort(t_stacks *stacks, int start, int end, t_count *count);
-void		check_dup_f(t_alg **c_algs, t_count **count);
+void		check_dup_f(t_alg **c_algs, t_count **count, t_stack *st);
 void		free_stack(t_stack *st, t_stacks *sts);
 void		free_algs(t_alg *c_algs, t_count *count);
 void		ranking(t_stack *st);
@@ -92,17 +92,21 @@ void		insert_to_b(t_stack **st2, t_stack **st1, t_count *count);
 void		bring_to_top(t_stack **a, int pos, t_count *count);
 void		place_in_b(t_stack **b, int pos_b, t_count *count);
 void		insert_to_b(t_stack **st2, t_stack **st1, t_count *count);
+void		insert_to_b_hybrid(t_stacks *stacks, int chunk, int i, t_count *c);
+void		update_best(t_stack **a, t_stack **b, t_stack *tmp, int *best);
+void		rotate_to_max(t_stack **b, int size, t_count *count);
 int			*get_array(t_stack *st);
 int			ft_lstsize(t_stack *lst);
-int			ft_atoi(const char *nptr, t_alg **c_algs, t_count **count);
+int			ft_atoi(const char *nptr, t_alg **c_algs, t_count **c, t_stack *st);
 int			validation(const char *arg);
 int			ft_isval(int c);
 int			ft_strcmp(const char *s1, const char *s2);
 int			find_target(t_stack **st, int n);
-int			check_flags(char *str, t_alg **c_algs, t_count **count);
+int			check_flags(char *str, t_alg **c_algs, t_count **c, t_stack *st);
 int			sort(t_stacks *stacks, int start, int end, t_count *count);
 int			get_chunk_size(int max_index);
 int			cost_for_rank(t_stack **a, t_stack **b, int rank, int idx);
+int			find_max_pos(t_stack *b);
 float		disorder(t_stack *st);
 char		**ft_split(char const *s, char c);
 t_stack		*parse(char **arg, t_alg **c_algs, t_count **count);

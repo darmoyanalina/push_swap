@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:35:40 by neohanya          #+#    #+#             */
-/*   Updated: 2026/04/11 13:19:16 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/12 17:14:20 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,40 +42,40 @@ void	check_duplicates(t_stack *st, t_alg **c_algs, t_count **count)
 		while (cur2)
 		{
 			if (cur1->content == cur2->content)
-				err(*c_algs, *count);
+				err(*c_algs, *count, st);
 			cur2 = cur2->next;
 		}
 		cur1 = cur1->next;
 	}
 }
 
-void	check_dup_f(t_alg **c_algs, t_count **count)
+void	check_dup_f(t_alg **c_algs, t_count **count, t_stack *st)
 {
 	static int	checked;
 
 	checked++;
 	if (checked > 1)
-		err(*c_algs, *count);
+		err(*c_algs, *count, st);
 }
 
-int	check_flags(char *str, t_alg **c_algs, t_count **count)
+int	check_flags(char *str, t_alg **c_algs, t_count **count, t_stack *st)
 {
 	static int	bench;
 
 	if (!ft_strcmp(str, "--simple"))
-		return (check_dup_f(c_algs, count), (*c_algs)->algorithm = 1);
+		return (check_dup_f(c_algs, count, st), (*c_algs)->algorithm = 1);
 	else if (!ft_strcmp(str, "--medium"))
-		return (check_dup_f(c_algs, count), (*c_algs)->algorithm = 2);
+		return (check_dup_f(c_algs, count, st), (*c_algs)->algorithm = 2);
 	else if (!ft_strcmp(str, "--complex"))
-		return (check_dup_f(c_algs, count), (*c_algs)->algorithm = 3);
+		return (check_dup_f(c_algs, count, st), (*c_algs)->algorithm = 3);
 	else if (!ft_strcmp(str, "--adaptive"))
-		return (check_dup_f(c_algs, count), (*c_algs)->adaptive = 1);
+		return (check_dup_f(c_algs, count, st), (*c_algs)->adaptive = 1);
 	if (!ft_strcmp(str, "--bench"))
 	{
 		(*c_algs)->bench = 1;
 		bench++;
 		if (bench > 1)
-			err(*c_algs, *count);
+			err(*c_algs, *count, st);
 		return (5);
 	}
 	return (0);

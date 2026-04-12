@@ -6,7 +6,7 @@
 /*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:33:58 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/11 13:11:59 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/12 17:13:10 by adarmoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	free_stack(t_stack *st, t_stacks *sts)
 		st = tmp;
 	}
 	st = NULL;
-	free(sts);
+	if (sts)
+		free(sts);
 	sts = NULL;
 }
 
