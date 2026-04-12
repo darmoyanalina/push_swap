@@ -6,7 +6,7 @@
 /*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 17:16:51 by neohanya          #+#    #+#             */
-/*   Updated: 2026/04/11 18:24:31 by neohanya         ###   ########.fr       */
+/*   Updated: 2026/04/12 13:36:45 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,103 @@ int	find_target(t_stack **st, int n)
 	return (pos);
 }
 
+static int	cost_for_rank(t_stack **a, t_stack **b, int rank, int pos_a_idx)
+{
+	int	size_a;
+	int	size_b;
+	int	ca;
+	int	cb;
+	int	pos_b;
+
+	size_a = ft_lstsize(*a);
+	size_b = ft_lstsize(*b);
+	pos_b = find_target(b, rank);
+	if (pos_a_idx <= size_a / 2)
+		ca = pos_a_idx;
+	else
+		ca = size_a - pos_a_idx;
+	if (pos_b == -1)
+		cb = 0;
+	else if (pos_b <= size_b / 2)
+		cb = pos_b;
+	else
+		cb = size_b - pos_b;
+	if (ca > cb)
+		return (ca);
+	return (cb);
+}
+
+static void	bring_to_top(t_stack **a, int pos, t_count *count)
+{
+	int	size;
+	int	i;
+
+	size = ft_lstsize(*a);
+	if (pos <= size / 2)
+	{
+		i = 0;
+		while (i++ < pos)
+			ra(a, count);
+	}
+	else
+	{
+		i = size - pos;
+		while (i-- > 0)
+			rra(a, count);
+	}
+}
+
+static void	place_in_b(t_stack **b, int pos_b, t_count *count)
+{
+	int	size;
+	int	i;
+
+	if (pos_b == -1)
+		return ;
+	size = ft_lstsize(*b);
+	if (pos_b <= size / 2)
+	{
+		i = 0;
+		while (i++ < pos_b)
+			rb(b, count);
+	}
+	else
+	{
+		i = size - pos_b;
+		while (i-- > 0)
+			rrb(b, count);
+	}
+}
+
 void	insert_to_b(t_stack **st2, t_stack **st1, t_count *count)
 {
-	int	pos;
-	int	save;
+	t_stack	*temp;
+	int		best_cost;
+	int		best_pos_a;
+	int		best_pos_b;
+	int		cost;
+	int		idx;
 
-	if (!(*st2) || (*st1)->rank > (*st2)->rank)
+	temp = *st1;
+	best_cost = INT_MAX;
+	best_pos_a = 0;
+	best_pos_b = 0;
+	idx = 0;
+	while (temp)
 	{
-		pb(st1, st2, count);
-		return ;
+		cost = cost_for_rank(st1, st2, temp->rank, idx);
+		if (cost < best_cost)
+		{
+			best_cost = cost;
+			best_pos_a = idx;
+			best_pos_b = find_target(st2, temp->rank);
+		}
+		temp = temp->next;
+		idx++;
 	}
-	pos = find_target(st2, (*st1)->rank);
-	if (pos == -1)
-	{
-		pb(st1, st2, count);
-		rb(st2, count);
-		return ;
-	}
-	save = pos;
-	while (pos-- > 0)
-		rb(st2, count);
+	bring_to_top(st1, best_pos_a, count);
+	place_in_b(st2, best_pos_b, count);
 	pb(st1, st2, count);
-	while (save-- > 0)
-		rrb(st2, count);
 }
 
 void	insertion_sort(t_stack **st1, t_stack **st2, t_count *count)
