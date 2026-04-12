@@ -22,7 +22,8 @@ SRC = push_swap.c \
       bench.c \
       medium_sort.c \
       parsing_utils.c \
-      insert_utils.c
+      insert_utils.c \
+      insert_to_b.c
 
 OBJ := $(SRC:.c=.o)
 
