@@ -61,7 +61,7 @@ This significantly reduces the number of operations compared to naive sorting.
 For large or highly disordered inputs, a more efficient algorithm is required.
 
 The most common solution is Radix Sort adapted for stacks, but, regardless of the endless tries of Razmik to convince us to use the Radix Sort, we chose the **Quick Sort**.
-I, to be honest, do not understand why everyone chose Radix Sort. Ok, it's interestig, it's cool to do everything in bits and it seems like some sort of a magic happened, but the Quick Sort is great too. I used rankings of the elements of the stack for it. The ranking is the index of an element when the stack is already sorted: the index it "desires" to have. And I gave the opportunity to them.
+I, to be honest, do not understand why everyone chose Radix Sort. Ok, it's interesting, it's cool to do everything in bits and it seems like some sort of a magic happened, but the Quick Sort is great too. I used rankings of the elements of the stack for it. The ranking is the index of an element when the stack is already sorted: the index it "desires" to have. And I gave the opportunity to them.
 
 Steps:
 1. Place the element with the middle rank in the middle of stack a (put the elements smaller than it on top of it (near the top  of the stack) and greater elements under it)

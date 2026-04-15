@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adarmoya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: neohanya <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 14:17:57 by adarmoya          #+#    #+#             */
-/*   Updated: 2026/04/12 18:15:59 by adarmoya         ###   ########.fr       */
+/*   Updated: 2026/04/15 13:33:18 by neohanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	call_sort(t_stacks *stacks, t_alg *c_algs, t_count *count)
 	else
 	{
 		c_algs = modify(c_algs, dis);
-		if (ft_lstsize(*(stacks->a)) <= 5 || (dis > 0 && dis < 0.2))
+		if (dis && (ft_lstsize(*(stacks->a)) <= 5 || (dis > 0 && dis < 0.2)))
 			insertion_sort(stacks->a, stacks->b, count);
 		else if (dis >= 0.2 && dis < 0.5)
 			medium_sort(stacks, count);
